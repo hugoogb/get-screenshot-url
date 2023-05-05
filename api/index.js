@@ -1,9 +1,9 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import morgan from "morgan";
-import puppeteer from "puppeteer-core";
-import chrome from "chrome-aws-lambda";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const puppeteer = require("puppeteer-core");
+const chrome = require("chrome-aws-lambda");
 
 dotenv.config();
 
@@ -55,5 +55,5 @@ app.get("/api/screenshot", async (req, res) => {
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
 	console.clear();
-	console.log(`Server listening in port ${PORT}`);
+	console.log(`Server listening on port ${PORT}`);
 });
