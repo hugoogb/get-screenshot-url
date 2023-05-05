@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import morgan from "morgan";
 import puppeteer from "puppeteer-core";
 import chrome from "chrome-aws-lambda";
 
@@ -9,9 +8,6 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-
-// middleware
-app.use(morgan("dev"));
 
 // static "home /" page
 app.use(express.static("public"));
