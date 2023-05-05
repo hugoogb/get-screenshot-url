@@ -6,34 +6,12 @@ import chrome from "chrome-aws-lambda";
 
 dotenv.config();
 
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
-
-const exePath =
-	process.platform === "win32"
-		? "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-		: process.platform === "linux"
-		? "/usr/bin/google-chrome"
-		: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-
-async function getOptions() {
-	let options;
-	IS_PRODUCTION
-		? (options = {
-				args: chrome.args,
-				executablePath: await chrome.executablePath,
-				headless: chrome.headless,
-		  })
-		: (options = {
-				args: [],
-				executablePath: exePath,
-				headless: true,
-		  });
-
-	return options;
-}
-
 async function takeScreenshot(url) {
-	const options = await getOptions();
+	const options = {
+		args: chrome.args,
+		executablePath: await chrome.executablePath,
+		headless: chrome.headless,
+	};
 	const browser = await puppeteer.launch(options);
 	const page = await browser.newPage();
 	await page.setViewport({
