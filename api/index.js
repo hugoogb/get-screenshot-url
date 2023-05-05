@@ -52,7 +52,7 @@ async function takeScreenshot(url) {
 const app = express();
 app.use(cors());
 
-app.get("/screenshot", async (req, res) => {
+app.get("/api/screenshot", async (req, res) => {
 	const { url } = req.query;
 	if (!url) {
 		res.status(400).json({ error: "URL parameter is required" });
