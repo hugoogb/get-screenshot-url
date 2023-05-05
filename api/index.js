@@ -43,7 +43,10 @@ app.get("/api/screenshot", async (req, res) => {
 			res.setHeader("Content-Type", "image/png");
 			res.send(screenshot);
 		} catch (error) {
-			res.status(500).json({ error: "Failed to take screenshot" });
+			res.status(500).json({
+				error: "Failed to take screenshot",
+				errorCode: error,
+			});
 		}
 	}
 });
