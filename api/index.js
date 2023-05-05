@@ -1,9 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const morgan = require("morgan");
-const puppeteer = require("puppeteer-core");
-const chrome = require("chrome-aws-lambda");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import morgan from "morgan";
+import puppeteer from "puppeteer-core";
+import chrome from "chrome-aws-lambda";
 
 dotenv.config();
 
