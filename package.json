@@ -1,7 +1,7 @@
 {
-	"name": "screenshot-api",
+	"name": "get-screenshot-url",
 	"version": "1.0.0",
-	"description": "Screenshot API",
+	"description": "Get screenshot of a url",
 	"main": "api/index.js",
 	"type": "module",
 	"scripts": {
