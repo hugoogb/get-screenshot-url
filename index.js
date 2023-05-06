@@ -1,35 +1,30 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import puppeteer from "puppeteer-core";
-import chrome from "chrome-aws-lambda";
+import puppeteer from "puppeteer";
+import morgan from "morgan";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 
+// middleware
+app.use(morgan("dev"));
+
 // static "home /" page
 app.use(express.static("public"));
 
-app.get("/api/screenshot", async (req, res) => {
+app.get("/screenshot", async (req, res) => {
 	async function takeScreenshot(url) {
-		const options = {
-			args: chrome.args,
-			executablePath: await chrome.executablePath,
-			headless: chrome.headless,
-		};
-		const browser = await puppeteer.launch(options);
+		const browser = await puppeteer.launch({ headless: "new" });
 		const page = await browser.newPage();
 		await page.setViewport({
-			width: 1280,
-			height: 720,
+			width: 1920,
+			height: 1080,
 		});
 		await page.goto(url, { waitUntil: "networkidle0" });
-		const screenshot = await page.screenshot({
-			type: "webp",
-			clip: { x: 0, y: 0, width: 1280, height: 720 },
-		});
+		const screenshot = await page.screenshot();
 		await browser.close();
 		return screenshot;
 	}
@@ -45,7 +40,6 @@ app.get("/api/screenshot", async (req, res) => {
 		} catch (error) {
 			res.status(500).json({
 				error: "Failed to take screenshot",
-				errorCode: error,
 			});
 		}
 	}
